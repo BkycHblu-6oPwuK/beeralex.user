@@ -1,5 +1,5 @@
 {
-    "name": "beeralex/beeralex.oauth2",
+    "name": "beeralex/beeralex.user",
     "type": "bitrix-module",
     "description": "",
     "license": "MIT",
