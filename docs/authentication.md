@@ -363,10 +363,10 @@ use Beeralex\User\Auth\Authenticators\EmptyAuthentificator;
 $emptyAuth = service(EmptyAuthentificator::class);
 
 // Авторизовать пользователя по ID
-$emptyAuth->authorizeByUserId(123);
+$resultAuth = $emptyAuth->authorizeByUserId(123);
 
 // Проверка авторизации Bitrix
-if ($emptyAuth->bitrixIsAuthorized()) {
+if ($resultAuth->isSuccess() || $emptyAuth->bitrixIsAuthorized()) {
     echo "Пользователь авторизован в Bitrix";
 }
 ```

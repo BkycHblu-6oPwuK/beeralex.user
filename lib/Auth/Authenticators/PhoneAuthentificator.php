@@ -67,7 +67,10 @@ class PhoneAuthentificator extends AbstractAuthentificator implements PhoneAuthe
             return $result;
         }
 
-        $this->authorizeByUserId($userId);
+        $resultAuth = $this->authorizeByUserId($userId);
+        if (!$resultAuth->isSuccess()) {
+            $result->addErrors($resultAuth->getErrors());
+        }
         return $result;
     }
 }

@@ -14,9 +14,15 @@ abstract class AbstractAuthentificator implements AuthenticatorContract
         protected readonly UserRepositoryContract $userRepository,
     ) {}
 
-    public function authorizeByUserId(int $userId): void
+    public function authorizeByUserId(int $userId): Result
     {
-        (new \CUser())->Authorize($userId);
+        global $USER;
+        $result = new Result();
+        if(is_object($USER)) {
+            $USER->Authorize($userId);
+            return $result;
+        }
+        return $result->addError(new \Bitrix\Main\Error("Global \$USER object is not available"));
     }
 
     public function register(AuthCredentialsDto $credentials): Result

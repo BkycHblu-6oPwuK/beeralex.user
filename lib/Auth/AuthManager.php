@@ -8,6 +8,7 @@ use Beeralex\User\Auth\Contracts\AuthenticatorContract;
 use Beeralex\User\Auth\Contracts\AuthValidatorInterface;
 use Beeralex\User\Contracts\UserRepositoryContract;
 use Beeralex\User\Auth\AuthCredentialsDto;
+use Beeralex\User\Auth\Authenticators\AbstractAuthentificator;
 use Bitrix\Main\Result;
 
 /**
@@ -112,7 +113,12 @@ class AuthManager
             return $result;
         }
 
-        $authenticator->authorizeByUserId($userId);
+        if ($authenticator instanceof AbstractAuthentificator) {
+            $resultAuth = $authenticator->authorizeByUserId($userId);
+            if(!$resultAuth->isSuccess()) {
+                $result->addErrors($resultAuth->getErrors());
+            }
+        }
 
         $result->setData([
             'userId' => $userId,
@@ -158,7 +164,7 @@ class AuthManager
      */
     protected function bitrixCurrentUserId(): ?int
     {
-        $user = service(UserRepositoryContract::class)->getCurrentUser();
+        $user = service(UserRepositoryContract::class)->getCurrentUser(refresh: true);
         if ($user->isAuthorized()) {
             return $user->getId();
         }

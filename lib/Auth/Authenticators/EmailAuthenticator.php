@@ -46,7 +46,10 @@ class EmailAuthenticator extends AbstractAuthentificator implements EmailAuthent
             return $result;
         }
 
-        $this->authorizeByUserId($user->getId());
+        $resultAuth = $this->authorizeByUserId($user->getId());
+        if (!$resultAuth->isSuccess()) {
+            $result->addErrors($resultAuth->getErrors());
+        }
         return $result;
     }
 }

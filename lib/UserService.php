@@ -74,7 +74,10 @@ class UserService extends CoreUserService
 
         $this->changePassword($user, $password);
 
-        service(EmptyAuthentificator::class)->authorizeByUserId($user->getId());
+        $resultAuth = service(EmptyAuthentificator::class)->authorizeByUserId($user->getId());
+        if (!$resultAuth->isSuccess()) {
+            $result->addErrors($resultAuth->getErrors());
+        }
 
         return $result;
     }
