@@ -16,11 +16,11 @@ final class Options extends AbstractOptions
 
     protected function mapOptions(array $options): void
     {
-        $this->enableJwtAuth = $options['BEERALEX_USER_ENABLE_JWT_AUTH'] === 'Y';
-        $this->jwtIssuer     = (string)$options['BEERALEX_USER_JWT_ISSUER'];
-        $this->jwtAlgorithm  = strtoupper(trim((string)($options['BEERALEX_USER_JWT_ALGORITHM'])));
-        $this->jwtTtl        = (int)$options['BEERALEX_USER_JWT_TTL'];
-        $this->jwtRefreshTtl = (int)$options['BEERALEX_USER_JWT_REFRESH_TTL'];
+        $this->enableJwtAuth = $options['beeralex_user_enable_jwt_auth'] === 'Y';
+        $this->jwtIssuer     = (string)$options['beeralex_user_jwt_issuer'];
+        $this->jwtAlgorithm  = strtoupper(trim((string)($options['beeralex_user_jwt_algorithm'])));
+        $this->jwtTtl        = (int)$options['beeralex_user_jwt_ttl'];
+        $this->jwtRefreshTtl = (int)$options['beeralex_user_jwt_refresh_ttl'];
 
         $allowed = ['HS256', 'HS384', 'HS512'];
         if (!in_array($this->jwtAlgorithm, $allowed, true)) {
@@ -32,7 +32,7 @@ final class Options extends AbstractOptions
         }
 
         if ($this->enableJwtAuth) {
-            $keyInput = (string)($options['BEERALEX_USER_JWT_SECRET_KEY'] ?? '');
+            $keyInput = (string)($options['beeralex_user_jwt_secret_key'] ?? '');
             $keyInput = $this->normalizeBase64Input($keyInput);
 
             if ($keyInput === '') {
