@@ -11,7 +11,7 @@ return Schema::make()
         'Токеновая авторизация (JWT)',
         function (SchemaTab $tab) {
             $tab->checkbox(
-                'BEERALEX_USER_ENABLE_JWT_AUTH',
+                'beeralex_user_enable_jwt_auth',
                 'Включить авторизацию по JWT токенам',
                 null,
                 false,
@@ -19,7 +19,7 @@ return Schema::make()
             );
 
             $tab->input(
-                'BEERALEX_USER_JWT_SECRET_KEY',
+                'beeralex_user_jwt_secret_key',
                 'Секретный ключ для JWT',
                 null,
                 null,
@@ -28,7 +28,7 @@ return Schema::make()
             );
 
             $tab->input(
-                'BEERALEX_USER_JWT_TTL',
+                'beeralex_user_jwt_ttl',
                 'Время жизни JWT токена (в секундах)',
                 null,
                 null,
@@ -37,7 +37,7 @@ return Schema::make()
             );
 
             $tab->input(
-                'BEERALEX_USER_JWT_REFRESH_TTL',
+                'beeralex_user_jwt_refresh_ttl',
                 'Время жизни refresh токена (в секундах)',
                 null,
                 null,
@@ -46,7 +46,7 @@ return Schema::make()
             );
 
             $tab->input(
-                'BEERALEX_USER_JWT_ALGORITHM',
+                'beeralex_user_jwt_algorithm',
                 'Алгоритм шифрования JWT',
                 null,
                 null,
@@ -55,7 +55,7 @@ return Schema::make()
             );
 
             $tab->input(
-                'BEERALEX_USER_JWT_ISSUER',
+                'beeralex_user_jwt_issuer',
                 'Издатель JWT токена (issuer)',
                 null,
                 null,
